@@ -26,6 +26,12 @@ namespace BarcelonaNomads.Controllers
                           View(await _context.Location.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Location'  is null.");
         }
+        
+        // GET: Locations/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
 
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
