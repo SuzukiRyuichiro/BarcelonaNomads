@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BarcelonaNomads.Data;
 using BarcelonaNomads.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BarcelonaNomads.Controllers
 {
@@ -32,6 +33,14 @@ namespace BarcelonaNomads.Controllers
         {
             return View();
         }
+        
+        // POST: Locations/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResult(String name)
+        {
+            return _context.Location != null ?
+                        View("Index", await _context.Location.Where( l => l.name.Contains(name)).ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Location'  is null.");
+        }
 
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -52,6 +61,7 @@ namespace BarcelonaNomads.Controllers
         }
 
         // GET: Locations/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -62,6 +72,7 @@ namespace BarcelonaNomads.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,name")] Location location)
         {
             if (ModelState.IsValid)
@@ -74,6 +85,7 @@ namespace BarcelonaNomads.Controllers
         }
 
         // GET: Locations/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Location == null)
@@ -94,6 +106,7 @@ namespace BarcelonaNomads.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,name")] Location location)
         {
             if (id != location.Id)
@@ -125,6 +138,7 @@ namespace BarcelonaNomads.Controllers
         }
 
         // GET: Locations/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Location == null)
@@ -145,6 +159,7 @@ namespace BarcelonaNomads.Controllers
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Location == null)
