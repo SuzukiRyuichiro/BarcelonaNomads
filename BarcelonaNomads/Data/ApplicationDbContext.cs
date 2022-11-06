@@ -13,3 +13,4 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<BarcelonaNomads.Models.Location>? Location { get; set; }
 }
 
+ 

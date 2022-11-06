@@ -13,6 +13,7 @@
     <None Remove="Swashbuckle.AspNetCore" />
     <None Remove="NuGet.CommandLine" />
     <None Remove="NuGet.PackageManagement" />
+    <None Remove="Data\Enums\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -34,4 +35,7 @@
     <PackageReference Include="NuGet.PackageManagement" Version="6.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Enums\" />
+  </ItemGroup>
 </Project>

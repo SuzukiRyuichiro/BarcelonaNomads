@@ -38,7 +38,7 @@ namespace BarcelonaNomads.Controllers
         public async Task<IActionResult> ShowSearchResult(String name)
         {
             return _context.Location != null ?
-                        View("Index", await _context.Location.Where( l => l.name.Contains(name)).ToListAsync()) :
+                        View("Index", await _context.Location.Where( l => l.Name.Contains(name)).ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Location'  is null.");
         }
 
@@ -73,7 +73,7 @@ namespace BarcelonaNomads.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,name")] Location location)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace BarcelonaNomads.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,name")] Location location)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Location location)
         {
             if (id != location.Id)
             {
