@@ -3,7 +3,23 @@
 @{
     ViewData["Title"] = "All locations";
 }
-<div class="row g-2">
+<div class="row">
+    <div class="col d-flex">
+        <div>
+            <input type="checkbox" class="btn-check" id="cafe" autocomplete="off">
+            <label class="btn btn-outline-success" for="cafe">☕️ Cafe</label>
+        </div>
+        <div class="ms-2">
+            <input type="checkbox" class="btn-check" id="coworking-space" autocomplete="off">
+            <label class="btn btn-outline-success" for="coworking-space">👩‍💻 Coworking Space</label>
+        </div>
+        <div class="ms-2">
+            <input type="checkbox" class="btn-check" id="library" autocomplete="off">
+            <label class="btn btn-outline-success" for="library">📚 Library</label>
+        </div>
+    </div>
+</div>
+<div class="row g-2 mt-3">
     @foreach (var item in Model)
     {
         @await Html.PartialAsync("./Components/_Card.cshtml", item)
