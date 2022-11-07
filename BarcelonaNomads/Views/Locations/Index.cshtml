@@ -3,12 +3,6 @@
 @{
     ViewData["Title"] = "All locations";
 }
-
-<h1>Locations</h1>
-
-<p>
-    <a asp-action="Create">Add a new location for others to see!</a>
-</p>
 <div class="row g-2">
     @foreach (var item in Model)
     {

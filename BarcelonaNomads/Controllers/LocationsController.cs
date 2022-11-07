@@ -53,7 +53,9 @@ namespace BarcelonaNomads.Controllers
                 return NotFound();
             }
 
-            var location = await _context.Locations.FirstOrDefaultAsync(m => m.Id == id);
+            var location = await _context.Locations
+                .Include(l => l.Reviews)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (location == null)
             {
                 return NotFound();
