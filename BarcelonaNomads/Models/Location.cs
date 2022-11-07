@@ -11,6 +11,9 @@ namespace BarcelonaNomads.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
+
+        [Display(Name = "Image URL")]
+        public string ImageURL { get; set; }
         public LocationType LocationType { get; set; }
 
         // Relationships

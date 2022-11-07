@@ -25,6 +25,8 @@ namespace BarcelonaNomads.Data
                             Address = "Passeig de Gràcia, 54, 08007 Barcelona, Spain",
                             Description =
                                 "A coworking space run by Santander. There are plenty of seats available with fast wifi up to 300 Mbps download. All you have to do is to purchase a drink or a snack from the cafe. Each tables comes with a power outlet and a USB port. If you're a Santander customer, you get discounts at the cafe, and you can also use the meeting rooms. Even if you are not a Santander customer, you can still take calls.",
+                            ImageURL =
+                                "https://res.cloudinary.com/scooter-scooter/image/upload/v1667827412/BarcelonaNomad/santander.jpg",
                             LocationType = LocationType.Cafe
                         },
                         new Location
@@ -33,6 +35,8 @@ namespace BarcelonaNomads.Data
                             Address = "C. de Pelai, 11, 08008 Barcelona, Spain",
                             Description =
                                 "A cool atmosphere cafe / coworking space run by Imagin. There are rooms designed for different purposes, yet the WiFi is relatively slow.",
+                            ImageURL =
+                                "https://res.cloudinary.com/scooter-scooter/image/upload/v1667827412/BarcelonaNomad/imagin.jpg",
                             LocationType = LocationType.Cafe
                         },
                         new Location
@@ -41,6 +45,8 @@ namespace BarcelonaNomads.Data
                             Address = "Pg. de Joan de Borbó, 99, 08039 Barcelona, Spain",
                             Description =
                                 "A coworking space by the beach. It starts from €199 a month, or €29 a day, and you get access to a beautiful space with a view of the beach. The WiFi is fast and reliable.",
+                            ImageURL =
+                                "https://res.cloudinary.com/scooter-scooter/image/upload/v1667827412/BarcelonaNomad/monday.jpg",
                             LocationType = LocationType.CoworkingSpace
                         },
                         new Location
@@ -50,6 +56,8 @@ namespace BarcelonaNomads.Data
                                 "Avinguda de la Granvia de l’Hospitalet, 115, 133, 08908 L'Hospitalet de Llobregat, Barcelona, Spain",
                             Description =
                                 "Perhaps not intended to used as a work place, but the cafeteria is big and there are a plenty of seats. There is free WiFi that is decently fast. As you may know, food and drinks are cheap, and if you're a IKEA family member, you get free coffee and tea.",
+                            ImageURL =
+                                "https://res.cloudinary.com/scooter-scooter/image/upload/v1667827412/BarcelonaNomad/ikea.jpg",
                             LocationType = LocationType.Cafe
                         },
                     }
