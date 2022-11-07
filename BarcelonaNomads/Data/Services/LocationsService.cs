@@ -19,7 +19,8 @@ namespace BarcelonaNomad.Data.Services
 
         public void Add(Location location)
         {
-            throw new NotImplementedException();
+            _context.Locations.Add(location);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)

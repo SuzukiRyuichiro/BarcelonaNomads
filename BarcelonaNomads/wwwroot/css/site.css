@@ -1,4 +1,6 @@
-﻿html {
+﻿@import url(./components/_card.css);
+
+html {
   font-size: 14px;
 }
 

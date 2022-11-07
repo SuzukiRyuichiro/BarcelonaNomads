@@ -28,6 +28,9 @@ namespace BarcelonaNomads.Models
         // Relationships
         public List<Review> Reviews { get; set; }
 
-        public Location() { }
+        public Location()
+        {
+            Reviews = new List<Review>();
+        }
     }
 }

@@ -4,7 +4,8 @@
   <div class="card h-100 overflow-hidden shadow-s">
     <a asp-action="Details" asp-route-id="@Model.Id">
       <div class="ratio ratio-4x3 overflow-hidden">
-        <img class="card-img-top" src="@Html.DisplayFor(l => l.ImageURL)" alt=" @Html.DisplayFor(l => l.Name)">
+        <img class="card-img-top object-fit-cover" src="@Html.DisplayFor(l => l.ImageURL)"
+          alt=" @Html.DisplayFor(l => l.Name)">
       </div>
     </a>
     <div class="card-body d-flex flex-column">
