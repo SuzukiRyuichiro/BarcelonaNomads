@@ -8,54 +8,38 @@ using Microsoft.EntityFrameworkCore;
 using BarcelonaNomads.Data;
 using BarcelonaNomads.Models;
 using Microsoft.AspNetCore.Authorization;
+using BarcelonaNomad.Data.Services;
 
 namespace BarcelonaNomads.Controllers
 {
     public class LocationsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ILocationsService _service;
 
-        public LocationsController(ApplicationDbContext context)
+        public LocationsController(ILocationsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            return _context.Locations != null
-                ? View(await _context.Locations.Include(l => l.Reviews).ToListAsync())
-                : Problem("Entity set 'ApplicationDbContext.Location'  is null.");
-        }
-
-        // GET: Locations/ShowSearchForm
-        public async Task<IActionResult> ShowSearchForm()
-        {
-            return View();
-        }
-
-        // POST: Locations/ShowSearchResults
-        public async Task<IActionResult> ShowSearchResult(String name)
-        {
-            return _context.Locations != null
-                ? View(
-                    "Index",
-                    await _context.Locations.Where(l => l.Name.Contains(name)).ToListAsync()
-                )
+            var locations = await _service.GetAll();
+            return locations != null
+                ? View(locations)
                 : Problem("Entity set 'ApplicationDbContext.Location'  is null.");
         }
 
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Locations == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var location = await _context.Locations
-                .Include(l => l.Reviews)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            // EDIT this
+            var location = await _service.Get(id: 1);
             if (location == null)
             {
                 return NotFound();
@@ -77,12 +61,13 @@ namespace BarcelonaNomads.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Location location)
+        public async Task<IActionResult> Create(
+            [Bind(include: "Name,Address,ImageURL,Description")] Location location
+        )
         {
             if (ModelState.IsValid)
             {
-                _context.Add(location);
-                await _context.SaveChangesAsync();
+                _service.Add(location);
                 return RedirectToAction(nameof(Index));
             }
             return View(location);
@@ -92,96 +77,17 @@ namespace BarcelonaNomads.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Locations == null)
+            if (id == null || _service.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var location = await _context.Locations.FindAsync(id);
+            var location = await _service.Get(1);
             if (location == null)
             {
                 return NotFound();
             }
             return View(location);
-        }
-
-        // POST: Locations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Location location)
-        {
-            if (id != location.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(location);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LocationExists(location.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(location);
-        }
-
-        // GET: Locations/Delete/5
-        [Authorize]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Locations == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _context.Locations.FirstOrDefaultAsync(m => m.Id == id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return View(location);
-        }
-
-        // POST: Locations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Locations == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Location'  is null.");
-            }
-            var location = await _context.Locations.FindAsync(id);
-            if (location != null)
-            {
-                _context.Locations.Remove(location);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool LocationExists(int id)
-        {
-            return (_context.Locations?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
