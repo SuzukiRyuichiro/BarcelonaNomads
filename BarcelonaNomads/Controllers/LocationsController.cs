@@ -24,22 +24,17 @@ namespace BarcelonaNomads.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            var locations = await _service.GetAll();
+            var locations = await _service.GetAllAsync();
             return locations != null
                 ? View(locations)
                 : Problem("Entity set 'ApplicationDbContext.Location'  is null.");
         }
 
         // GET: Locations/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var location = await _service.GetAsync(id);
 
-            // EDIT this
-            var location = await _service.Get(id: 1);
             if (location == null)
             {
                 return NotFound();
@@ -67,7 +62,7 @@ namespace BarcelonaNomads.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Add(location);
+                await _service.AddAsync(location);
                 return RedirectToAction(nameof(Index));
             }
             return View(location);
@@ -75,14 +70,14 @@ namespace BarcelonaNomads.Controllers
 
         // GET: Locations/Edit/5
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _service.GetAll() == null)
+            if (_service.GetAllAsync() == null)
             {
                 return NotFound();
             }
 
-            var location = await _service.Get(1);
+            var location = await _service.GetAsync(id: id);
             if (location == null)
             {
                 return NotFound();

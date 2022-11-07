@@ -17,10 +17,10 @@ namespace BarcelonaNomad.Data.Services
             _context = context;
         }
 
-        public void Add(Location location)
+        public async Task AddAsync(Location location)
         {
-            _context.Locations.Add(location);
-            _context.SaveChanges();
+            await _context.Locations.AddAsync(location);
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -28,16 +28,16 @@ namespace BarcelonaNomad.Data.Services
             throw new NotImplementedException();
         }
 
-        public Task<Location> Get(int id)
+        public async Task<Location> GetAsync(int id)
         {
-            var location = _context.Locations
-                ?.Include(l => l.Reviews)
+            var location = await _context.Locations
+                .Include(l => l.Reviews)
                 .FirstOrDefaultAsync(l => l.Id == id);
 
             return location;
         }
 
-        public async Task<IEnumerable<Location>> GetAll()
+        public async Task<IEnumerable<Location>> GetAllAsync()
         {
             var locations = await _context.Locations.Include(l => l.Reviews).ToListAsync();
             return locations;
