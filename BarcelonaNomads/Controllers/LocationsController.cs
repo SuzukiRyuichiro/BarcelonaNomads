@@ -37,7 +37,8 @@ namespace BarcelonaNomads.Controllers
 
             if (location == null)
             {
-                return NotFound();
+                NotFound();
+                return View("NotFound");
             }
 
             return View(location);
