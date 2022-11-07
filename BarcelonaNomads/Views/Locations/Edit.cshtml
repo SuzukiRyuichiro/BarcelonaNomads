@@ -1,34 +1,86 @@
 @model BarcelonaNomads.Models.Location
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit " + Model.Name;
 }
-
-<h1>Edit</h1>
-
-<h4>Location</h4>
-<hr />
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-4">
+        <h1>Edit</h1>
+        <hr />
+        <div id="locationImageWrapper" class=" w-100 ratio d-none ratio-16x9 rounded-2 overflow-hidden mb-2">
+            <img id="locationImage" src="" alt="Picture of the location" />
+        </div>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+
+            <div class="form-group form-floating mb-3">
+                <input asp-for="Name" type="text" class="form-control" id="floatingName" placeholder="Hello World Cafe">
+                <label asp-for="Name" for="floatingName">Name</label>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="form-group form-floating mb-3">
+                <input asp-for="Address" type="text" class="form-control" id="floatingAddress" placeholder="Barcelona">
+                <label asp-for="Address" for="floatingAddress">Address</label>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-floating mb-3">
+                <input asp-for="Description" type="text" class="form-control" id="floatingDescription"
+                    placeholder="Barcelona">
+                <label asp-for="Description" for="floatingDescription">Description</label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-floating mb-3">
+
+                <input asp-for="ImageURL" type="text" class="form-control" id="floatingImageURL"
+                    placeholder="Barcelona">
+                <label asp-for="ImageURL" for="floatingImageURL">Image URL</label>
+                <span asp-validation-for="ImageURL" class="text-danger"></span>
+            </div>
+
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+    const imageURLField = document.getElementById("floatingImageURL");
+
+    $(document).ready(() => {
+        if (imageURLField.value) {
+            const locationImage = document.getElementById("locationImage");
+            const locationImageWrapper = document.getElementById("locationImageWrapper");
+            locationImage.src = imageURLField.value;
+            locationImageWrapper.classList.remove("d-none");
+        }
+    });
+
+    imageURLField.addEventListener('change', () => {
+        const locationImage = document.getElementById("locationImage");
+        const locationImageWrapper = document.getElementById("locationImageWrapper");
+        const url = imageURLField.value;
+
+        const regex = new RegExp("https?://.+");
+        if (regex.test(url)) {
+            locationImage.src = url;
+            locationImageWrapper.classList.remove("d-none");
+        } else {
+            locationImage.src = "";
+            locationImageWrapper.classList.add("d-none");
+        }
+    });
+</script>
 }

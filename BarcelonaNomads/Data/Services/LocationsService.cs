@@ -43,9 +43,11 @@ namespace BarcelonaNomad.Data.Services
             return locations;
         }
 
-        public Location Update(int id, Location location)
+        public async Task<Location> UpdateAsync(int id, Location location)
         {
-            throw new NotImplementedException();
+            _context.Update(location);
+            await _context.SaveChangesAsync();
+            return location;
         }
     }
 }

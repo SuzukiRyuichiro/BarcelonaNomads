@@ -11,7 +11,7 @@ namespace BarcelonaNomad.Data.Services
         Task<IEnumerable<Location>> GetAllAsync();
         Task<Location> GetAsync(int id);
         Task AddAsync(Location location);
-        Location Update(int id, Location location);
+        Task<Location> UpdateAsync(int id, Location location);
         void Delete(int id);
     }
 }

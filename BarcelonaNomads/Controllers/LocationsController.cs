@@ -72,17 +72,29 @@ namespace BarcelonaNomads.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            if (_service.GetAllAsync() == null)
-            {
-                return NotFound();
-            }
-
             var location = await _service.GetAsync(id: id);
             if (location == null)
             {
                 return NotFound();
             }
             return View(location);
+        }
+
+        // POST: Locations/Edit/5
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Location location)
+        {
+            // Validate the new location
+            if (!ModelState.IsValid)
+            {
+                return View(location);
+            }
+            // tell the service to update
+            await _service.UpdateAsync(id, location);
+            // redirect to index
+            return RedirectToAction(nameof(Index));
         }
     }
 }
