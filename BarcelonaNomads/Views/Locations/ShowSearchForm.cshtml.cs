@@ -36,7 +36,7 @@ namespace BarcelonaNomads.Views.Locations
                 return Page();
             }
 
-            _context.Location.Add(Location);
+            _context.Locations.Add(Location);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

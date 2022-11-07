@@ -12,7 +12,7 @@ namespace BarcelonaNomads.Models
         public LocationType LocationType { get; set; }
 
         // Relationships
-        public List<Review> Review { get; set; }
+        public List<Review> Reviews { get; set; }
 
         public Location()
         { 

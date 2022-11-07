@@ -10,7 +10,20 @@ public class ApplicationDbContext : IdentityDbContext
         : base(options)
     {
     }
-    public DbSet<BarcelonaNomads.Models.Location>? Location { get; set; }
+
+    public DbSet<BarcelonaNomads.Models.Location>? Locations { get; set; }
+    public DbSet<BarcelonaNomads.Models.Review>? Reviews { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Review>()
+            .HasOne(review => review.Location)
+            .WithMany(location => location.Reviews)
+            .HasForeignKey(review => review.LocationId);
+    }
+
 }
 
  

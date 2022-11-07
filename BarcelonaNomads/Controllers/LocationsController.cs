@@ -23,8 +23,8 @@ namespace BarcelonaNomads.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-              return _context.Location != null ? 
-                          View(await _context.Location.ToListAsync()) :
+              return _context.Locations != null ? 
+                          View(await _context.Locations.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Location'  is null.");
         }
         
@@ -37,20 +37,20 @@ namespace BarcelonaNomads.Controllers
         // POST: Locations/ShowSearchResults
         public async Task<IActionResult> ShowSearchResult(String name)
         {
-            return _context.Location != null ?
-                        View("Index", await _context.Location.Where( l => l.Name.Contains(name)).ToListAsync()) :
+            return _context.Locations != null ?
+                        View("Index", await _context.Locations.Where( l => l.Name.Contains(name)).ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Location'  is null.");
         }
 
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Location == null)
+            if (id == null || _context.Locations == null)
             {
                 return NotFound();
             }
 
-            var location = await _context.Location
+            var location = await _context.Locations
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (location == null)
             {
@@ -88,12 +88,12 @@ namespace BarcelonaNomads.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Location == null)
+            if (id == null || _context.Locations == null)
             {
                 return NotFound();
             }
 
-            var location = await _context.Location.FindAsync(id);
+            var location = await _context.Locations.FindAsync(id);
             if (location == null)
             {
                 return NotFound();
@@ -141,12 +141,12 @@ namespace BarcelonaNomads.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Location == null)
+            if (id == null || _context.Locations == null)
             {
                 return NotFound();
             }
 
-            var location = await _context.Location
+            var location = await _context.Locations
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (location == null)
             {
@@ -162,14 +162,14 @@ namespace BarcelonaNomads.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Location == null)
+            if (_context.Locations == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Location'  is null.");
             }
-            var location = await _context.Location.FindAsync(id);
+            var location = await _context.Locations.FindAsync(id);
             if (location != null)
             {
-                _context.Location.Remove(location);
+                _context.Locations.Remove(location);
             }
             
             await _context.SaveChangesAsync();
@@ -178,7 +178,7 @@ namespace BarcelonaNomads.Controllers
 
         private bool LocationExists(int id)
         {
-          return (_context.Location?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Locations?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
