@@ -1,0 +1,14 @@
+@model BarcelonaNomads.Models.Location;
+
+<div class="col">
+  <a asp-action="Details" asp-route-id="@Model.Id">
+    <div class="card h-100 ratio rounded-2 ratio-4x3 overflow-hidden shadow-s" style="width: 18rem;">
+      @* <img src="@Html.DisplayFor(l => l.ImageURL)" alt=" @Html.DisplayFor(l => l.Name)"> *@
+      <div class="card-img-overlay text-white d-flex flex-column"
+        style="background-size: cover; background-position: center; background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('@Html.DisplayFor(l => l.ImageURL)'">
+        <h5 class="card-title">@Html.DisplayFor(l => l.Name)</h5>
+        <p class="card-text flex-grow-1"><i class="bi bi-pin-map"></i> @Html.DisplayFor(l => l.Address)</p>
+      </div>
+    </div>
+  </a>
+</div>
