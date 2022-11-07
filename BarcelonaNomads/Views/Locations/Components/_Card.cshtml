@@ -8,6 +8,11 @@
         style="background-size: cover; background-position: center; background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('@Html.DisplayFor(l => l.ImageURL)'">
         <h5 class="card-title">@Html.DisplayFor(l => l.Name)</h5>
         <p class="card-text flex-grow-1"><i class="bi bi-pin-map"></i> @Html.DisplayFor(l => l.Address)</p>
+        @{
+          int count = @Model.Reviews.Count();
+          string suffix = count == 1 ? "review" : "reviews";
+        }
+        <p class="card-text"><i class="bi bi-chat"></i> @count @suffix</p>
       </div>
     </div>
   </a>
