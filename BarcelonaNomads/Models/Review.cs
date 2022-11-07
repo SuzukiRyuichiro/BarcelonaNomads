@@ -8,16 +8,14 @@ namespace BarcelonaNomads.Models
     {
         [Key]
         public int Id { get; set; }
-        public string content { get; set; }
+        public string Content { get; set; }
 
         // Relationship
         public int LocationId { get; set; }
+
         [ForeignKey("LocationId")]
         public Location Location { get; set; }
 
-        public Review()
-        {
-        }
+        public Review() { }
     }
 }
-

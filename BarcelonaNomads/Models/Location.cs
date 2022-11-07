@@ -10,14 +10,12 @@ namespace BarcelonaNomads.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public string Description { get; set; }
         public LocationType LocationType { get; set; }
 
         // Relationships
         public List<Review> Reviews { get; set; }
 
-        public Location()
-        { 
-
-        }
+        public Location() { }
     }
 }
