@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.Json;
 using System.ComponentModel.DataAnnotations;
 using BarcelonaNomads.Data;
 
@@ -31,11 +30,6 @@ namespace BarcelonaNomads.Models
 
         // Relationships
         public List<Review> Reviews { get; set; }
-
-        public string LocationJson()
-        {
-            return JsonSerializer.Serialize<Location>(this);
-        }
 
         public Location()
         {

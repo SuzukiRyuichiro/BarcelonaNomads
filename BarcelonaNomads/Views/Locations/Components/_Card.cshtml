@@ -1,10 +1,9 @@
-@using BarcelonaNomads.Data
+@using BarcelonaNomads.Data;
 @model BarcelonaNomads.Models.Location;
 
 @{
   LocationType locationType = Model.LocationType;
   string Emoji;
-  string Json = Model.ToString();
 
   switch (locationType)
   {
@@ -23,7 +22,8 @@
   }
 }
 
-<div class="col-6 col-md-4 col-lg-3" data-locaiton-json="@Json">
+<div class="col-6 col-md-4 col-lg-3" data-target="location-card" data-location-type="@Model.LocationType"
+  data-lng="@Model.Longitude" data-lat="@Model.Latitude">
   <div class="card h-100 overflow-hidden shadow-s">
     <a asp-action="Details" asp-route-id="@Model.Id">
       <div class="ratio ratio-4x3 overflow-hidden">
@@ -39,7 +39,6 @@
         string suffix = count == 1 ? "review" : "reviews";
       }
       <p class="card-text"><i class="bi bi-chat"></i> @count @suffix</p>
-
     </div>
   </div>
 </div>

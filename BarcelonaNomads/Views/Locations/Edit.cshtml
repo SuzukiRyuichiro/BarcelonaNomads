@@ -138,8 +138,8 @@
     const longitudeField = document.getElementById("floatingLongitude");
     const latitudeField = document.getElementById("floatingLatitude");
 
-    const longitude = longitudeField.value;
-    const latitude = latitudeField.value;
+    const longitude = Number.parseFloat(longitudeField.value);
+    const latitude = Number.parseFloat(latitudeField.value);
 
     const getLngLat = async () => {
         const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${addressField.value}.json?country=es&bbox=1.859424,41.141336,2.634753,41.574265&access_token=${mapboxgl.accessToken}`
@@ -161,6 +161,8 @@
             .setLngLat([longitude, latitude])
             .addTo(map);
     }
+
+    console.log({ longitude, latitude });
 
     if (!longitude || !latitude) {
         getLngLat();
