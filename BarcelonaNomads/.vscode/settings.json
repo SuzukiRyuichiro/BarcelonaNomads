@@ -1,0 +1,5 @@
+{
+  "appService.preDeployTask": "publish-release",
+  "appService.deploySubpath": "bin/Release/net6.0/publish",
+  "appService.defaultWebAppToDeploy": "/subscriptions/45558f9f-28ea-4642-b98b-509f6c7581e4/AppServices/subscriptions/45558f9f-28ea-4642-b98b-509f6c7581e4/resourceGroups/dragon.aka.scooter_rg_4778/providers/Microsoft.Web/sites/BarcelonaNomads"
+}
