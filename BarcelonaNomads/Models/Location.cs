@@ -25,6 +25,9 @@ namespace BarcelonaNomads.Models
         [Required(ErrorMessage = "Type of the location is required.")]
         public LocationType LocationType { get; set; }
 
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+
         // Relationships
         public List<Review> Reviews { get; set; }
 
