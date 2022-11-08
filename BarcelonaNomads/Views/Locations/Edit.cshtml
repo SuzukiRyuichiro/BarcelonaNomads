@@ -138,6 +138,9 @@
     const longitudeField = document.getElementById("floatingLongitude");
     const latitudeField = document.getElementById("floatingLatitude");
 
+    const longitude = longitudeField.value;
+    const latitude = latitudeField.value;
+
     const getLngLat = async () => {
         const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${addressField.value}.json?country=es&bbox=1.859424,41.141336,2.634753,41.574265&access_token=${mapboxgl.accessToken}`
         const res = await fetch(url);
@@ -159,6 +162,20 @@
             .addTo(map);
     }
 
-    getLngLat();
+    if (!longitude || !latitude) {
+        getLngLat();
+    } else {
+        map.flyTo({
+            zoom: 16,
+            center: [longitude, latitude],
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+
+        // Create a new marker.
+        const marker = new mapboxgl.Marker()
+            .setLngLat([longitude, latitude])
+            .addTo(map);
+    }
+
 </script>
 }
